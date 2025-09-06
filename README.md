@@ -17,7 +17,7 @@ Finds Minecraft coordinates from bedrock patterns using world seeds. This is a J
 
 ### 1. Download the Latest Release
 
-Download the latest `Bedrock-Finder-X.X.zip` file from the [releases page](https://github.com/TimonGaebele/Bedrock-Finder/releases).
+Download the latest `Bedrock-Finder-X.X.zip` file from the [releases page](https://github.com/TimonGaebele/Bedrock-Formation-Locator/releases).
 
 ### 2. Configuration
 
