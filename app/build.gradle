@@ -1,22 +1,24 @@
 plugins {
-    id 'application' // <1>
+    id 'application'
 }
 
+version = project.findProperty('Version') ?: '1.0'
+
 repositories {
-    mavenCentral() // <2>
+    mavenCentral()
 }
 
 dependencies {
-    testImplementation libs.junit.jupiter // <3>
+    testImplementation libs.junit.jupiter
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    implementation libs.guava // <4>
+    implementation libs.guava
     implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 application {
-    mainClass = 'demo.App' // <5>
+    mainClass = 'demo.App'
 }
 
 jar {
@@ -27,12 +29,20 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    archiveBaseName = 'Bedrock-Finder'
 }
 
 tasks.named('test') {
-    useJUnitPlatform() // <6>
+    useJUnitPlatform()
 }
 
-tasks.withType(JavaExec) {
-    workingDir = rootDir
+task distribution(type: Zip) {
+    from(jar)
+    from(project.rootDir) {
+        include 'config.json'
+        include 'CONFIG_DOCUMENTATION.md'
+        include 'README.md'
+    }
+    archiveBaseName = 'Bedrock-Finder'
+    destinationDirectory = file("$buildDir/distributions")
 }
