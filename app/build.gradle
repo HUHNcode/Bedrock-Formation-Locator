@@ -1,0 +1,38 @@
+plugins {
+    id 'application' // <1>
+}
+
+repositories {
+    mavenCentral() // <2>
+}
+
+dependencies {
+    testImplementation libs.junit.jupiter // <3>
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation libs.guava // <4>
+    implementation 'com.google.code.gson:gson:2.10.1'
+}
+
+application {
+    mainClass = 'demo.App' // <5>
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes 'Main-Class': 'demo.App'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform() // <6>
+}
+
+tasks.withType(JavaExec) {
+    workingDir = rootDir
+}
