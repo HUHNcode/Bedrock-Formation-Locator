@@ -12,5 +12,5 @@
   "searchRadiusZ": 1000000,
   "startX": 0,
   "startZ": 0,
-  "threads": 16
+  "threads": 8
 }
